@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MidtermProject
+{
+    public class Rental
+    {
+        private string moviename;
+        private string rentername;
+        private string phonenumber;
+        private string email;
+
+        public string MovieName
+        {
+            get
+            {
+                return this.moviename;
+            }
+            set
+            {
+                this.moviename = value;
+            }
+        }
+            public string RenterName
+            {
+                get
+                {
+                    return this.rentername;
+                }
+                set
+                {
+                    this.rentername = value;
+                }
+            }
+        public string PhoneNumber
+            {
+                get 
+                {
+                    return this.phonenumber;
+                }
+            set
+                {
+                    this.phonenumber = value;
+                }
+            }
+        public string Email
+        {
+            get
+            {
+                return this.email;
+            }
+            set 
+            {
+                this.email = value;
+            }
+        }
+        public Rental()
+        {
+            this.moviename = " The Perfect Guy ";
+            this.rentername = " Brittany Cross ";
+            this.phonenumber = " 216-407-9868 ";
+            this.email = " crossby2013@gmail.com ";
+        }
+        public Rental(string moviename, string rentername, string phonenumber, string email)
+        {
+            this.moviename = moviename;
+            this.rentername = rentername;
+            this.phonenumber = phonenumber;
+            this.email = email;
+        }
+        public void Summary()
+        {
+            Console.Write("Renter's account information is: " + " " + moviename + " " + rentername + " " + phonenumber + " " + email);
+        }
+        
+    }
+}
