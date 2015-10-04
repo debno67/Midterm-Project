@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MovieService
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary <string,double> movieTitle = new Dictionary <string,double>();
+            movieTitle.Add("The Walk", 2.00);
+            movieTitle.Add("Everest", 2.50);
+            movieTitle.Add("Jurassic World", 2.00);
+            movieTitle.Add("Inside Out", 2.00);
+            movieTitle.Add("Pitch Perfect2", 3.00);
+            movieTitle.Add("Spy", 2.25);
+            movieTitle.Add("Insurgent", 2.00);
+            movieTitle.Add("The Hobbit", 2.00);
+            movieTitle.Add("The Martian", 2.00);
+            movieTitle.Add("The Intern", 2.00);
+            movieTitle.Add("Avengers:Age of Ultron", 2.00);
+            movieTitle.Add("Vacation", 2.00);
+            movieTitle.Add("Legend", 2.00);
+            movieTitle.Add("Cinderella", 2.00);
+            movieTitle.Add("Point Break", 2.00);
+            movieTitle.Add("Macbeth", 2.00);
+
+            foreach(KeyValuePair<string,double> titles in movieTitle)
+
+            {
+                Console.WriteLine(titles);
+                
+            }
+            Console.WriteLine("Select a movie:");
+
+            string userReply=Console.ReadLine();
+
+            Console.ReadLine();
+
+
+        }
+    }
+}
+
+            
+
