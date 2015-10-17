@@ -1,0 +1,238 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Reflection;
+using System.IO;
+
+namespace MovieService
+{
+    public class Rental
+    {
+        private string moviename;
+        private string rentername;
+        private string phonenumber;
+        private string email;
+
+
+        public string MovieName
+        {
+            get
+            {
+                return this.moviename;
+            }
+            set
+            {
+                this.moviename = value;
+            }
+        }
+        public string RenterName
+        {
+            get
+            {
+                return this.rentername;
+            }
+            set
+            {
+                this.rentername = value;
+            }
+        }
+        public string PhoneNumber
+        {
+            get
+            {
+                return this.phonenumber;
+            }
+            set
+            {
+                this.phonenumber = value;
+            }
+        }
+        public string Email
+        {
+            get
+            {
+                return this.email;
+            }
+            set
+            {
+                this.email = value;
+            }
+
+        }
+
+        public Rental()
+        {
+            this.moviename = " The Perfect Guy ";
+            this.rentername = " Brittany Cross ";
+            this.phonenumber = " 216-407-9868 ";
+            this.email = " crossby2013@gmail.com ";
+        }
+        public Rental(string moviename, string rentername, string phonenumber, string email)
+        {
+            this.moviename = moviename;
+            this.rentername = rentername;
+            this.phonenumber = phonenumber;
+            this.email = email;
+        }
+
+        static void Date()
+        {
+            DateTime dateIn = new DateTime(2015, 10, 30);
+            DateTime dateOut = DateTime.Now;
+            TimeSpan ts = dateIn - dateOut;
+            int differenceInDays = ts.Days;
+            var date = DateTime.UtcNow.AddDays(new Random().Next(30));
+            int lateAmount = 2;
+
+            Console.WriteLine(date);
+
+            if (date <= dateIn)
+            {
+                Console.WriteLine("Thank You");
+            }
+            else
+            {
+
+                Console.WriteLine("Please pay" + " " + "$" + (differenceInDays * lateAmount));
+            }
+        }
+
+        public static void Main(string[] args)
+        {
+
+            //Create an instance of StreamWriter to write to a file
+            StreamWriter writer = new StreamWriter("..\\..\\account.txt");
+            //the using statement will auto-close the file for us
+            using (writer)
+            {
+                Dictionary<string, double> movieTitle = new Dictionary<string, double>();
+                movieTitle.Add("The Walk", 2.00);
+                movieTitle.Add("Everest", 2.50);
+                movieTitle.Add("Jurassic World", 2.00);
+                movieTitle.Add("Inside Out", 2.00);
+                movieTitle.Add("Pitch Perfect2", 3.00);
+                movieTitle.Add("Spy", 2.25);
+                movieTitle.Add("Insurgent", 2.00);
+                movieTitle.Add("The Hobbit", 2.00);
+                movieTitle.Add("The Martian", 2.00);
+                movieTitle.Add("The Intern", 2.00);
+                movieTitle.Add("Avengers:Age of Ultron", 2.00);
+                movieTitle.Add("Vacation", 2.00);
+                movieTitle.Add("Legend", 2.00);
+                movieTitle.Add("Cinderella", 2.00);
+                movieTitle.Add("Point Break", 2.00);
+                movieTitle.Add("Macbeth", 2.00);
+
+                foreach (KeyValuePair<string, double> movie in movieTitle)
+                {
+                    Console.WriteLine(movie);
+
+                }
+
+                //  StringWriter sw = new StringWriter();
+                  Console.WriteLine("Movie Rental");
+                  Console.Write("Movie:\t\t");
+
+                  string movietitle = Console.ReadLine();
+
+                  writer.WriteLine("Movie:" + movietitle);
+                  Console.Write("Name:\t\t");
+                  string name = Console.ReadLine();
+
+                  writer.WriteLine("Name:" + name);
+                  Console.Write("Phone:\t\t");
+                  string phone = Console.ReadLine();
+
+                  writer.WriteLine("Phone:" + phone);
+                  Console.Write("Email:\t\t");
+                  string email = Console.ReadLine();
+
+                  writer.WriteLine("Email" + email);
+                  Console.Write("Date Out:\t");
+                  string dateOut = Console.ReadLine();
+
+                  writer.WriteLine("Date Out" + dateOut);
+                  Console.Write("Date In:\t");
+                  string dateIn = Console.ReadLine();
+
+                  writer.WriteLine("Date In" + dateIn);
+                  
+
+                  writer.WriteLine();
+
+                 Console.WriteLine("Select a movie:");
+
+                string userReply = Console.ReadLine();
+
+
+                if (movieTitle.ContainsKey(userReply))
+                {
+                    Console.WriteLine("Full Name:\t");
+                    string userReply1 = Console.ReadLine();
+                    Console.WriteLine("Phone Number:\t");
+                    string userReply2 = Console.ReadLine();
+                    Console.WriteLine("email:\t");
+                    string userReply3 = Console.ReadLine();
+                }
+                else
+                {
+
+                    Console.WriteLine("Invalid Entry, Please select from list.");
+
+                    string userReply4 = Console.ReadLine();
+                    Console.WriteLine("Full Name");
+                    string userReply1 = Console.ReadLine();
+                    Console.WriteLine("Phone Number");
+                    string userReply2 = Console.ReadLine();
+                    Console.WriteLine("email");
+                    string userReply3 = Console.ReadLine();
+                }
+                {
+
+                    Date();
+
+                    writer.WriteLine(userReply);
+
+                }
+
+
+                Console.ReadLine();
+                {
+                }
+            }
+        }
+    }
+}
+
+
+        
+    
+
+
+
+    
+
+ 
+    
+
+
+            
+ 
+    
+
+
+ 
+ 
+ 
+
+
+ 
+ 
+
+ 
+    
+
+
+            
