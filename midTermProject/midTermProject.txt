@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 using System.IO;
+using System.Text.RegularExpressions;
+
 
 namespace MovieService
 {
@@ -14,7 +15,6 @@ namespace MovieService
         private string rentername;
         private string phonenumber;
         private string email;
-
 
         public string MovieName
         {
@@ -59,9 +59,7 @@ namespace MovieService
             {
                 this.email = value;
             }
-
         }
-
         public Rental()
         {
             this.moviename = " The Perfect Guy ";
@@ -69,43 +67,58 @@ namespace MovieService
             this.phonenumber = " 216-407-9868 ";
             this.email = " crossby2013@gmail.com ";
         }
-        public Rental(string moviename, string rentername, string phonenumber, string email)
+        public Rental(string rentername, string phonenumber, string email)
         {
-            this.moviename = moviename;
+
             this.rentername = rentername;
+
             this.phonenumber = phonenumber;
+
             this.email = email;
         }
 
-        static void Date()
+        public static void Date()
         {
+
             DateTime dateIn = new DateTime(2015, 10, 30);
             DateTime dateOut = DateTime.Now;
             TimeSpan ts = dateIn - dateOut;
             int differenceInDays = ts.Days;
+            Console.WriteLine("\nMovie checked in:");
             var date = DateTime.UtcNow.AddDays(new Random().Next(30));
             int lateAmount = 2;
-
             Console.WriteLine(date);
+
 
             if (date <= dateIn)
             {
-                Console.WriteLine("Thank You");
+                Console.WriteLine("\nThank You");
             }
             else
             {
 
-                Console.WriteLine("Please pay" + " " + "$" + (differenceInDays * lateAmount));
+                Console.WriteLine("\nPlease pay" + " " + "$" + differenceInDays * lateAmount);
+
+                // Console.WriteLine("\nEnter Full Name");
+                // string rentername = Console.ReadLine();
+                // Console.WriteLine("\nEnter Phone Number");
+                // string phonenumber = Console.ReadLine();
+                // Console.WriteLine("\nEnter Email");
+                // string email = Console.ReadLine();
             }
         }
 
-        public static void Main(string[] args)
-        {
 
-            //Create an instance of StreamWriter to write to a file
+
+
+
+        static void Main(string[] args)
+        {
             StreamWriter writer = new StreamWriter("..\\..\\account.txt");
-            //the using statement will auto-close the file for us
             using (writer)
+
+ 
+
             {
                 Dictionary<string, double> movieTitle = new Dictionary<string, double>();
                 movieTitle.Add("The Walk", 2.00);
@@ -125,114 +138,125 @@ namespace MovieService
                 movieTitle.Add("Point Break", 2.00);
                 movieTitle.Add("Macbeth", 2.00);
 
-                foreach (KeyValuePair<string, double> movie in movieTitle)
+
+                foreach (KeyValuePair<string, double> titles in movieTitle)
                 {
-                    Console.WriteLine(movie);
+                    Console.WriteLine(titles);
 
                 }
-
-                //  StringWriter sw = new StringWriter();
-                  Console.WriteLine("Movie Rental");
-                  Console.Write("Movie:\t\t");
-
-                  string movietitle = Console.ReadLine();
-
-                  writer.WriteLine("Movie:" + movietitle);
-                  Console.Write("Name:\t\t");
-                  string name = Console.ReadLine();
-
-                  writer.WriteLine("Name:" + name);
-                  Console.Write("Phone:\t\t");
-                  string phone = Console.ReadLine();
-
-                  writer.WriteLine("Phone:" + phone);
-                  Console.Write("Email:\t\t");
-                  string email = Console.ReadLine();
-
-                  writer.WriteLine("Email" + email);
-                  Console.Write("Date Out:\t");
-                  string dateOut = Console.ReadLine();
-
-                  writer.WriteLine("Date Out" + dateOut);
-                  Console.Write("Date In:\t");
-                  string dateIn = Console.ReadLine();
-
-                  writer.WriteLine("Date In" + dateIn);
-                  
-
-                  writer.WriteLine();
-
-                 Console.WriteLine("Select a movie:");
-
-                string userReply = Console.ReadLine();
-
-
-                if (movieTitle.ContainsKey(userReply))
-                {
-                    Console.WriteLine("Full Name:\t");
-                    string userReply1 = Console.ReadLine();
-                    Console.WriteLine("Phone Number:\t");
-                    string userReply2 = Console.ReadLine();
-                    Console.WriteLine("email:\t");
-                    string userReply3 = Console.ReadLine();
-                }
-                else
+                while (true)
                 {
 
-                    Console.WriteLine("Invalid Entry, Please select from list.");
+                    Console.WriteLine("\nSelect a movie");
+                    string userReply = Console.ReadLine();
 
-                    string userReply4 = Console.ReadLine();
-                    Console.WriteLine("Full Name");
-                    string userReply1 = Console.ReadLine();
-                    Console.WriteLine("Phone Number");
-                    string userReply2 = Console.ReadLine();
-                    Console.WriteLine("email");
-                    string userReply3 = Console.ReadLine();
+
+                    if (movieTitle.ContainsKey(userReply))
+                    {
+
+                        Console.WriteLine("\nEnter Full Name");
+                        Regex name = new Regex(@"^[a-zA-Z''-'\s]{1,40}$");
+                        string rentername = Console.ReadLine();
+                        Match match2 = name.Match(rentername);
+                        if (match2.Success)
+                        {
+                            Console.WriteLine("\nValid Name");
+ 
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nInvalid Name");
+                            Console.WriteLine("\nEnter Valid Name");
+                            rentername = Console.ReadLine();
+                            
+                        }
+                        Regex phoneExp = new Regex(@"\(?\s?(\d{3})\s?-?\s?\)?\s?(\d{3})\s?-?\s?(\d{4})");
+                        Console.WriteLine("\nEnter Phone Number");
+                        string phonenumber = Console.ReadLine();
+                        while (phoneExp.Match(phonenumber).Success == false)
+                        {
+                            Console.WriteLine("\nInvalid Entry");
+                            Console.WriteLine("\nEnter Valid Phone Number");
+                            phonenumber = Console.ReadLine();
+                            writer.WriteLine("Phone:" + phonenumber);
+                        }
+
+                        Console.WriteLine("\nValid Phone Number");
+                        Regex ev = new Regex((@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"));
+                        Console.WriteLine("\nEnter Email");
+                        string email = Console.ReadLine();
+                        Match match = ev.Match(email);
+                        if (match.Success)
+                        {
+                            Console.WriteLine(email);
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nNot Valid");
+                            Console.WriteLine("\nEnter Valid Email");
+                            email = Console.ReadLine();
+                            writer.WriteLine("Email" + email);
+                        }
+
+                          Rental account1 = new Rental(rentername, phonenumber, email);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nInvalid entry, Please select from list");
+                        string userply4 = Console.ReadLine();
+
+                        Console.WriteLine("\nEnter Full Name");
+                        string rentername = Console.ReadLine();
+                        Regex phoneExp = new Regex(@"\(?\s?(\d{3})\s?-?\s?\)?\s?(\d{3})\s?-?\s?(\d{4})");
+                        Console.WriteLine("\nEnter Phone Number");
+                        string phonenumber = Console.ReadLine();
+                        while (phoneExp.Match(phonenumber).Success == false)
+                        {
+                            Console.WriteLine("\nInvalid Entry");
+                            Console.WriteLine("\nEnter Valid Phone Number");
+                            phonenumber = Console.ReadLine();
+                            writer.WriteLine("Phone" + phonenumber);
+                        }
+
+                        Console.WriteLine("\nValid Phone Number");
+                        Regex ev = new Regex((@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"));
+                        Console.WriteLine("\nEnter Email");
+                        string email = Console.ReadLine();
+                        Match match = ev.Match(email);
+                        if (match.Success)
+                        {
+                            Console.WriteLine("\nValid Email");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nNot Valid");
+                            Console.WriteLine("\nEnter Valid Email");
+                            email = Console.ReadLine();
+                            writer.WriteLine("Email" + email);
+                        }
+                    }
+
+                    //Rental account2 = new Rental(rentername, phonenumber, email);
+
+                    {
+
+                        Date();
+
+
+                    }
+
+
+
+
+
+
+                    Console.ReadLine();
                 }
-                {
-
-                    Date();
-
-                    writer.WriteLine(userReply);
-
-                }
 
 
-                Console.ReadLine();
-                {
-                }
             }
+
         }
     }
 }
 
-
-        
-    
-
-
-
-    
-
- 
-    
-
-
-            
- 
-    
-
-
- 
- 
- 
-
-
- 
- 
-
- 
-    
-
-
-            
